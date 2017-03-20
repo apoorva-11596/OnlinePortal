@@ -23,4 +23,3 @@ class User < ActiveRecord::Base
     # user.skip_confirmation!
   end
 end
-end

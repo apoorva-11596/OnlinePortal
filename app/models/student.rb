@@ -11,6 +11,7 @@ class Student < ActiveRecord::Base
   validates_uniqueness_of :email
 
 
+
   def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.email = auth.info.email
@@ -22,6 +23,4 @@ class Student < ActiveRecord::Base
     # user.skip_confirmation!
   end
 end
-end
-
 
