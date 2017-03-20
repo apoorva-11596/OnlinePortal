@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   
   devise_scope :users do
     get "/auth/facebook/callback" => "omniauth_callbacks#facebook"
+    get "/auth/facebook" => "omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"
+    #post "/auth/facebook" => "omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"
   end
 
   devise_scope :students do
     get "/auth/facebook/callback" => "omniauth_callbacks#facebook"
+    get "/auth/facebook" => "omniauth_callbacks#passthru", as: "student_facebook_omniauth_authorize"
+    #post "/auth/facebook" => "omniauth_callbacks#passthru", as: "student_facebook_omniauth_authorize"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
