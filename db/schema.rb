@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20170320190914) do
     t.string   "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "sid"
-    t.integer  "fid"
     t.integer  "poster_id"
     t.integer  "employee_id"
     t.integer  "finisher_id"
+    t.integer  "sid"
+    t.integer  "fid"
   end
 
   create_table "students", force: :cascade do |t|
