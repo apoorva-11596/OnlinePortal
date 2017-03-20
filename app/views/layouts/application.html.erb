@@ -7,6 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user.nil? %>
+	<%= link_to "Sign In User", new_user_session_path %>
+<% else %>
+	<%= link_to "Sign Out user", destroy_user_session_path, method: "delete" %>
+<% end %>
+
+<% if current_student.nil? %>
+	<%= link_to "Sign In Student", new_student_session_path %>
+<% else %>
+	<%= link_to "Sign Out user", destroy_student_session_path, method: "delete" %>
+<% end %>
 
 <%= yield %>
 

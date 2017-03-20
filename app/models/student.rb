@@ -3,7 +3,6 @@ class Student < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
   has_one :ongoing_project, class_name: 'Project', foreign_key: 'sid'
   has_many :completed_projects, class_name: 'Project', foreign_key: 'fid'
 
@@ -13,11 +12,11 @@ class Student < ActiveRecord::Base
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |student|
+      student.email = auth.info.email
+      student.password = Devise.friendly_token[0,20]
+      #student.name = auth.info.name   # assuming the user model has a name
+      #student.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
