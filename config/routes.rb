@@ -2,13 +2,10 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     get "/auth/facebook/callback" => "omniauth_callbacks#facebook"
-    #get "/users/auth/facebook" => "users_omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"
     post "/auth/facebook?model=user" => "omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"
   end
 
   devise_scope :student do
-    get "/auth/facebook/callback" => "omniauth_callbacks#facebook"
-    #get "/students/auth/facebook" => "students_omniauth_callbacks#passthru", as: "student_facebook_omniauth_authorize"
     post "/auth/facebook?model=student" => "omniauth_callbacks#passthru", as: "student_facebook_omniauth_authorize"
   end
   devise_for :students, controllers: {registrations: "students/registrations", sessions: "students/sessions", confirmations: "students/confirmations", passwords: "students/passwords"}
