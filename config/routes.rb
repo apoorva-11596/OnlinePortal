@@ -5,9 +5,14 @@ Rails.application.routes.draw do
     post "/auth/facebook?model=user" => "omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"
   end
 
+  get '/users/dashboard' => 'users#dashboard', as: "user_dashboard"
+
   devise_scope :student do
     post "/auth/facebook?model=student" => "omniauth_callbacks#passthru", as: "student_facebook_omniauth_authorize"
   end
+
+  get '/students/dashboard' => 'students#dashboard', as: "student_dashboard"
+
   devise_for :students, controllers: {registrations: "students/registrations", sessions: "students/sessions", confirmations: "students/confirmations", passwords: "students/passwords"}
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", confirmations: "users/confirmations", passwords: "users/passwords"}
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,6 +20,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'extras#home'
+
+  resources :projects do
+    get :autocomplete_project_title, :on => :collection
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

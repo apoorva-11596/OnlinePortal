@@ -2,34 +2,34 @@
 <html>
 <head>
   <title>Onlineportal</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if current_user.nil? %>
-	<%= link_to "Sign In User", new_user_session_path %>
-<% else %>
-	<%= link_to "Sign Out user", destroy_user_session_path, method: "delete" %>
-<% end %>
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">ONLINE PORTAL</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><% if current_user.nil? %>
+              <%= link_to "Sign In User", new_user_session_path %>
+            <% else %>
+              <%= link_to "Sign Out user", destroy_user_session_path, method: "delete" %>
+            <% end %>
+       </li>
+        <li><% if current_student.nil? %>
+              <%= link_to "Sign In Student", new_student_session_path %>
+            <% else %>
+              <%= link_to "Sign Out Student", destroy_student_session_path, method: "delete" %>
+            <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<% if current_student.nil? %>
-	<%= link_to "Sign In Student", new_student_session_path %>
-<% else %>
-	<%= link_to "Sign Out Student", destroy_student_session_path, method: "delete" %>
-<% end %>
 
-
-<div>
-	<% if !current_user.nil? %>
-  <%= image_tag user_image_url(@user),class: "avatar"%> <%= @user.email %>
-  <%end%>
-
-  <% if !current_student.nil? %>
-  <%= image_tag student_image_url(@student),class: "avatar"%> <%= @student.email %>
-  <%end%>
-</div>
 
 <%= yield %>
 
