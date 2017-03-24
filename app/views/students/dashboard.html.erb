@@ -1,0 +1,5 @@
+<div>
+  <% if !current_student.nil? %>
+  <%= image_tag student_image_url(@student),class: "avatar"%> <%= @student.email %>
+  <%end%>
+</div>

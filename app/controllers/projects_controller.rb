@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  autocomplete :project, :title
   # GET /projects
   # GET /projects.json
   def index
@@ -32,10 +32,11 @@ end
   def create
     newparams=setter project_params
     @project=Project.new(project_params)
-    @project.poster_id=current_user.id
     @project.tag_list.add(project_params[:tag_list])
-    byebug
-    #@project = Project.new(project_params)
+    @project = Project.new(project_params)
+    if !current_user.nil?
+        @project.poster_id = current_user.id
+    end
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }

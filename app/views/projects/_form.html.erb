@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.autocomplete_field :title, autocomplete_project_title_projects_path %>
   </div>
   <div class="field">
     <%= f.label :deadline %><br>

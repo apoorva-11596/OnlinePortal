@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20170324173142) do
 
+
   create_table "projects", force: :cascade do |t|
     t.string   "description"
     t.string   "budget"

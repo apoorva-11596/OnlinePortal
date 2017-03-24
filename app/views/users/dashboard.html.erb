@@ -1,0 +1,6 @@
+<div>
+	<% if !current_user.nil? %>
+  <%= image_tag user_image_url(@user),class: "avatar"%> <%= @user.email %>
+  <%end%>
+
+</div>
