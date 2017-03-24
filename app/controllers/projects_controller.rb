@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   autocomplete :project, :title
+  after_action :send_email, only: [:create]
   # GET /projects
   # GET /projects.json
   def index
@@ -20,6 +21,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
   end
+
+  def send_email
+    #byebug
+   ProjectMailer.post_email(@user,@project).deliver_now
+ end
 
   # POST /projects
   # POST /projects.json
