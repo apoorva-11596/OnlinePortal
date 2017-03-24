@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :projects
+
   devise_scope :user do
     get "/auth/facebook/callback" => "omniauth_callbacks#facebook"
     post "/auth/facebook?model=user" => "omniauth_callbacks#passthru", as: "user_facebook_omniauth_authorize"

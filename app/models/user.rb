@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
 
+  
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
@@ -23,7 +25,7 @@ class User < ActiveRecord::Base
       #user.first_name = auth.info.name.split.first   # assuming the user model has a name
       #user.last_name = auth.info.name.split.last   # assuming the user model has a name
       user.remote_avatar_url = auth.info.image.gsub('http://','https://') #"http://graph.facebook.com/#{auth.uid}/picture?type=large" # assuming the user model has an image
-      byebug
+      #byebug
       #user.skip_confirmation!
       #user.name = auth.info.name   # assuming the user model has a name
       #user.image = auth.info.image # assuming the user model has an image

@@ -22,14 +22,23 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+
   def send_email
     #byebug
    ProjectMailer.post_email(@user,@project).deliver_now
  end
 
+def setter project_params
+  newparams=Hash.new()
+  newparams={:title => project_params[:title],:description => project_params[:description],:tag => project_params[:tag]}
+end
+
   # POST /projects
   # POST /projects.json
   def create
+    newparams=setter project_params
+    @project=Project.new(project_params)
+    @project.tag_list.add(project_params[:tag_list])
     @project = Project.new(project_params)
     if !current_user.nil?
         @project.poster_id = current_user.id
@@ -77,6 +86,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:description, :budget, :title, :deadline)
+      params.require(:project).permit(:description, :budget, :title, :deadline, :tag_list)
     end
 end
