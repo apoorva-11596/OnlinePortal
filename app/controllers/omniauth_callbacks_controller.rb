@@ -11,6 +11,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_user_registration_url
       end
     else
+      # byebug
       @student = Student.from_omniauth(request.env["omniauth.auth"])
       if @student.persisted?
         sign_in_and_redirect @student, :event => :authentication #this will throw if @user is not activated

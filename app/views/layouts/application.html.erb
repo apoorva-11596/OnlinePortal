@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <% if current_user.nil? %>
 	<%= link_to "Sign In User", new_user_session_path %>
 <% else %>
@@ -18,6 +19,17 @@
 <% else %>
 	<%= link_to "Sign Out Student", destroy_student_session_path, method: "delete" %>
 <% end %>
+
+
+<div>
+	<% if !current_user.nil? %>
+  <%= image_tag user_image_url(@user),class: "avatar"%> <%= @user.email %>
+  <%end%>
+
+  <% if !current_student.nil? %>
+  <%= image_tag student_image_url(@student),class: "avatar"%> <%= @student.email %>
+  <%end%>
+</div>
 
 <%= yield %>
 
