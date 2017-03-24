@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'acts-as-taggable-on', '~> 4.0'
+
 gem 'omniauth-facebook'
 
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'

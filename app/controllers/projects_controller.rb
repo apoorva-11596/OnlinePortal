@@ -21,11 +21,21 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+def setter project_params
+  newparams=Hash.new()
+  newparams={:title => project_params[:title],:description => project_params[:description],:tag => project_params[:tag]}
+end
+
+
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
-
+    newparams=setter project_params
+    @project=Project.new(project_params)
+    @project.poster_id=current_user.id
+    @project.tag_list.add(project_params[:tag_list])
+    byebug
+    #@project = Project.new(project_params)
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -69,6 +79,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:description, :budget, :title, :deadline)
+      params.require(:project).permit(:description, :budget, :title, :deadline, :tag_list)
     end
 end
